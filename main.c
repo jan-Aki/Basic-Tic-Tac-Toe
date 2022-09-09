@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <windows.h>
 
 int main(){
     system("cls");
@@ -16,14 +17,38 @@ int main(){
 
     for (i = 0; i < 9; i++){
         if(m == 'x'){
-            printf("x turn\n");
+            XTURN:printf("x turn\n");
             scanf("%d%d", &r, &c);
+            if (board[r][c] != '-'){
+                printf("Invalid move");
+                Sleep(1000);
+                system("cls");
+                for (j = 0; j < 3; j++){
+            for (k = 0; k < 3; k++){
+                printf("%c ", board[j][k]);
+            }
+        printf("\n");
+        }
+                goto XTURN;
+            }
             board[r][c] = 'x';
             m = 'o';
             system("cls");
         } else {
-            printf("o turn\n");
+            OTURN:printf("o turn\n");
             scanf("%d%d", &r, &c);
+            if (board[r][c] != '-'){
+                printf("Invalid move");
+                Sleep(1000);
+                system("cls");
+                for (j = 0; j < 3; j++){
+            for (k = 0; k < 3; k++){
+                printf("%c ", board[j][k]);
+            }
+        printf("\n");
+        }
+                goto OTURN;
+            }
             board[r][c] = 'o';
             m = 'x';
             system("cls");
@@ -116,3 +141,4 @@ return 0;
 //it has win detection now. i'll probably come back and add better detection someday, but today is not that day
 //over half of it is just checking to see if someone won lol
 //i also need to make it so that you can't just overwrite someone's move, but i can't think of an elegant way to do that without making them forfeit or something
+//i learned how to use goto so now it yells at you when you try to cheat
